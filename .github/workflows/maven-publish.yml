@@ -32,7 +32,7 @@ jobs:
       id: bump_version
       uses: anothrNick/github-tag-action@1.36.0
       env:
-        TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DRY_RUN: true
         
@@ -45,17 +45,17 @@ jobs:
     - name: Publish package
       run: mvn --batch-mode deploy
       env:
-        TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Create a Release
       uses: elgohr/Github-Release-Action@v4
       env:
-        TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         title: Release ${{ steps.bump_version.outputs.new_tag }}
         
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
       env:
-        TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true

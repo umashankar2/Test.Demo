@@ -34,7 +34,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: true
         
-    - name: Update Version
+    - name: Update Pom Version
       run: mvn versions:set -DnewVersion=${{ steps.bump_version.outputs.new_tag }}
 
     - name: Build with Maven

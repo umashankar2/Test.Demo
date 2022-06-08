@@ -25,9 +25,8 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
-        distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+        distribution: 'adopt'
+
     - name: Bump version
       id: bump_version
       uses: anothrNick/github-tag-action@1.36.0
@@ -43,9 +42,9 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Publish package
-      run: mvn deploy
+      run: mvn --batch-mode deploy
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         
     - name: Create a Release
       uses: elgohr/Github-Release-Action@v4

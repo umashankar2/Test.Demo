@@ -3,24 +3,25 @@ name: Mixed inputs
 on:
   workflow_dispatch:
     inputs:
-      name:
+      tf_action_type:
         type: choice
-        description: Who to greet
+        description: What to do?
         options: 
-        - monalisa
-        - cschleiden
-      message:
-        required: true
-      use-emoji:
-        type: boolean
-        description: Include  emojis
-      environment:
-        type: environment
+        - plan
+        - apply
+
 
 jobs:
-  greet:
+  plan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Send greeting
-      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+    - name: Run Plan
+      run: echo "${{ github.event.inputs.tf_action_type }}"
+      
+  apply:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run Apply
+      run: echo "${{ github.event.inputs.tf_action_type }}"

@@ -1,0 +1,21 @@
+name: Loop Task
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  loop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Loop until condition is met
+        id: loop
+        run: |
+          counter=0
+          while [ $counter -lt 10 ]
+          do
+            # run your task here
+            echo "Task iteration $counter"
+            counter=$((counter+1))
+          done
